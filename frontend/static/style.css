@@ -1,0 +1,135 @@
+:root {
+  --primary: #1a6b54;
+  --primary-dark: #0f4a3a;
+  --danger: #c0392b;
+  --warning: #d68910;
+  --info: #2874a6;
+  --normal: #1e8449;
+  --bg: #f7f7f5;
+  --card-bg: #ffffff;
+  --text: #222;
+  --border: #dcdcdc;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 18px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.topbar {
+  background: var(--primary);
+  color: #fff;
+  padding: 16px 24px;
+}
+.topbar h1 { margin: 0; font-size: 22px; }
+
+.patient-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: #eef4f1;
+  flex-wrap: wrap;
+}
+
+select, input, textarea, button {
+  font-size: 16px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+button:hover { background: var(--primary-dark); }
+
+.hidden { display: none !important; }
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 24px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 24px;
+  border-bottom: 2px solid var(--border);
+  flex-wrap: wrap;
+}
+.tab-btn {
+  background: none;
+  color: var(--text);
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  padding: 12px 16px;
+  font-weight: 600;
+}
+.tab-btn.active {
+  border-bottom: 3px solid var(--primary);
+  color: var(--primary);
+}
+
+.tab-content { display: none; padding: 0 0 24px; }
+.tab-content.active { display: block; }
+
+.chat-window {
+  margin: 16px 24px;
+  min-height: 300px;
+  max-height: 480px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  background: var(--card-bg);
+}
+
+.msg { margin-bottom: 14px; padding: 10px 14px; border-radius: 10px; max-width: 85%; white-space: pre-wrap; line-height: 1.5; }
+.msg.user { background: #dcefe8; margin-left: auto; }
+.msg.assistant { background: #f0f0f0; margin-right: auto; }
+
+.chat-form {
+  display: flex;
+  gap: 10px;
+  margin: 0 24px;
+}
+.chat-form textarea { flex: 1; resize: vertical; }
+
+.disclaimer { margin: 12px 24px; color: #666; font-size: 14px; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.form-grid label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; font-weight: 600; }
+
+#vitalAlerts { margin: 0 24px; }
+.alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; font-weight: 600; }
+.alert.normal { background: #eafaf1; color: var(--normal); }
+.alert.info { background: #eaf2f8; color: var(--info); }
+.alert.warning { background: #fef5e7; color: var(--warning); }
+.alert.danger { background: #fdedec; color: var(--danger); }
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--border); font-size: 15px; }
+
+@media (max-width: 700px) {
+  body { font-size: 16px; }
+  .card, .chat-window, .chat-form, #vitalAlerts, .disclaimer { margin-left: 12px; margin-right: 12px; }
+}

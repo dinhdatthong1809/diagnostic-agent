@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trợ lý AI Sức khỏe</title>
+<link rel="stylesheet" href="static/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>🩺 Trợ lý AI Hỗ trợ Chẩn đoán & Theo dõi Bệnh Mãn tính</h1>
+  </header>
+
+  <section class="patient-bar">
+    <label for="patientSelect">Bệnh nhân:</label>
+    <select id="patientSelect"></select>
+    <button id="newPatientBtn">+ Thêm bệnh nhân mới</button>
+  </section>
+
+  <div id="newPatientForm" class="card hidden">
+    <h3>Thêm bệnh nhân</h3>
+    <input id="npName" placeholder="Họ tên" />
+    <input id="npAge" type="number" placeholder="Tuổi" />
+    <select id="npGender">
+      <option value="">Giới tính</option>
+      <option value="Nam">Nam</option>
+      <option value="Nữ">Nữ</option>
+    </select>
+    <input id="npAddress" placeholder="Địa chỉ (xã/huyện)" />
+    <input id="npConditions" placeholder="Bệnh nền (vd: tăng huyết áp, đái tháo đường)" />
+    <button id="saveNewPatientBtn">Lưu</button>
+  </div>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="chat">💬 Trò chuyện chẩn đoán</button>
+    <button class="tab-btn" data-tab="vitals">📋 Nhập chỉ số sức khỏe</button>
+    <button class="tab-btn" data-tab="history">📈 Lịch sử & biểu đồ</button>
+  </nav>
+
+  <main>
+    <section id="tab-chat" class="tab-content active">
+      <div id="chatWindow" class="chat-window"></div>
+      <form id="chatForm" class="chat-form">
+        <textarea id="chatInput" rows="2" placeholder="Mô tả triệu chứng hiện tại của bệnh nhân..."></textarea>
+        <button type="submit">Gửi</button>
+      </form>
+      <p class="disclaimer">⚠️ Đây là công cụ hỗ trợ sàng lọc ban đầu, KHÔNG thay thế chẩn đoán của bác sĩ.</p>
+    </section>
+
+    <section id="tab-vitals" class="tab-content">
+      <div class="card">
+        <h3>Nhập chỉ số đo</h3>
+        <div class="form-grid">
+          <label>Huyết áp tâm thu (mmHg)<input id="vSystolic" type="number"></label>
+          <label>Huyết áp tâm trương (mmHg)<input id="vDiastolic" type="number"></label>
+          <label>Đường huyết (mg/dL)<input id="vGlucose" type="number"></label>
+          <label>Nhịp tim (lần/phút)<input id="vHeartRate" type="number"></label>
+          <label>Cân nặng (kg)<input id="vWeight" type="number"></label>
+        </div>
+        <button id="submitVitalBtn">Lưu chỉ số</button>
+      </div>
+      <div id="vitalAlerts"></div>
+    </section>
+
+    <section id="tab-history" class="tab-content">
+      <div class="card">
+        <canvas id="bpChart" height="90"></canvas>
+      </div>
+      <div class="card">
+        <canvas id="glucoseChart" height="90"></canvas>
+      </div>
+      <div class="card">
+        <h3>Bảng lịch sử đo</h3>
+        <table id="historyTable">
+          <thead>
+            <tr><th>Thời gian</th><th>HA</th><th>Đường huyết</th><th>Nhịp tim</th><th>Mức độ</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="static/app.js"></script>
+</body>
+</html>
