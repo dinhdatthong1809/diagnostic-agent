@@ -59,7 +59,6 @@ def get_llm():
         _llm = ChatAnthropic(
             model=ANTHROPIC_MODEL,
             api_key=ANTHROPIC_API_KEY,
-            temperature=0.2,
             max_tokens=1024,
         )
     return _llm
