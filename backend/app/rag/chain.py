@@ -103,10 +103,28 @@ def build_prompt(question: str, context_docs: List, patient_summary: str, chat_h
 """
 
 
+def extract_text(content) -> str:
+    """Một số model (có suy luận mở rộng) trả về content dạng list các block
+    (vd: {"type": "thinking", ...}, {"type": "text", ...}) thay vì string thuần.
+    Hàm này chỉ lấy phần text hiển thị cho người dùng.
+    """
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        parts = []
+        for block in content:
+            if isinstance(block, str):
+                parts.append(block)
+            elif isinstance(block, dict) and block.get("type") == "text":
+                parts.append(block.get("text", ""))
+        return "\n".join(p for p in parts if p)
+    return str(content)
+
+
 def ask(question: str, patient_summary: str, chat_history: List[Dict]):
     retriever = get_retriever()
     docs = retriever.invoke(question)
     prompt = build_prompt(question, docs, patient_summary, chat_history)
     response = get_llm().invoke(prompt)
     sources = sorted({d.metadata.get("source", "unknown") for d in docs})
-    return response.content, sources
+    return extract_text(response.content), sources
