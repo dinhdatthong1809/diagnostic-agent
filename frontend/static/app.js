@@ -85,6 +85,13 @@ async function loadChatHistory() {
   messages.forEach((m) => appendMessage(m.role, m.content));
 }
 
+document.getElementById("chatInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    document.getElementById("chatForm").requestSubmit();
+  }
+});
+
 document.getElementById("chatForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!currentPatientId) {

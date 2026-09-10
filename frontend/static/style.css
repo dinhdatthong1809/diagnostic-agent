@@ -13,12 +13,24 @@
 
 * { box-sizing: border-box; }
 
+html, body { height: 100%; }
+
 body {
   margin: 0;
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 18px;
   background: var(--bg);
   color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .topbar {
@@ -84,13 +96,20 @@ button:hover { background: var(--primary-dark); }
   color: var(--primary);
 }
 
-.tab-content { display: none; padding: 0 0 24px; }
-.tab-content.active { display: block; }
+.tab-content {
+  display: none;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0 0 24px;
+  overflow-y: auto;
+}
+.tab-content.active { display: flex; }
 
 .chat-window {
+  flex: 1 1 auto;
+  min-height: 0;
   margin: 16px 24px;
-  min-height: 300px;
-  max-height: 480px;
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -106,10 +125,11 @@ button:hover { background: var(--primary-dark); }
   display: flex;
   gap: 10px;
   margin: 0 24px;
+  flex: 0 0 auto;
 }
 .chat-form textarea { flex: 1; resize: vertical; }
 
-.disclaimer { margin: 12px 24px; color: #666; font-size: 14px; }
+.disclaimer { margin: 12px 24px; color: #666; font-size: 14px; flex: 0 0 auto; }
 
 .form-grid {
   display: grid;
